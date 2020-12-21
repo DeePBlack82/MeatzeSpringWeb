@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de búsqueda</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script th:src="@{/js/formulario.js}" src="..\static\js\formulario.js"></script>
+</head>
+<body>
+    <form name="form" class="m-5">
+        <div class="form-row mb-3">
+            <div class="form-check form-check-inline col-md-2">
+                <input class="form-check-input" type="radio" name="consulta" id="ordenadores" value="ordenadores" checked>
+                <label class="form-check-label" for="ordenadores">Ordenadores</label>
+              </div>
+              <div class="form-check form-check-inline col-md-2">
+                <input class="form-check-input" type="radio" name="consulta" id="perifericos" value="perifericos">
+                <label class="form-check-label" for="perifericos">Periféricos</label>
+              </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="inputState">Centro</label>
+                <select  id="centro" name="centro" class="form-control">
+                  <option id="centroTodos" name="todos" value="todos">TODOS</option>
+                  <option th:each="centro:${centros}" th:text="${centro.localidad}" th:id="${centro.id_centro}" th:name="${centro.id_centro}" th:value="${centro.id_centro}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputState">Aula</label>
+                <select id="aula" name="aula" class="form-control">
+                  <option value="0" selected>TODAS</option>
+                  
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">Criterio de búsqueda (Ordenador)</label>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxMemoria" id="cbxMemoria">
+                  <label class="form-check-label" for="cbxMemoria">
+                    Memoria
+                  </label>
+                  <select id="selMemoria" name="selMemoria" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todas</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxAlmacenamiento" id="cbxAlmacenamiento">
+                  <label class="form-check-label" for="cbxAlmacenamiento">
+                    Almacenamiento
+                  </label>
+                  <select id="selAlmacenamiento" name="selAlmacenamiento" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todos</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPcOperativo" id="cbxPcOperativo">
+                  <label class="form-check-label" for="cbxPcOperativo">
+                    Operativo
+                  </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPcUso" id="cbxPcUso">
+                  <label class="form-check-label" for="cbxPcUso">
+                    Uso
+                  </label>
+                </div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">Criterio de búsqueda (Periférico)</label>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxNombre" id="cbxNombre" disabled>
+                  <label class="form-check-label" for="cbxNombre">
+                    Nombre
+                  </label>
+                  <select id="selNombre" name="selNombre" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todos</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPeriOperativo" id="cbxPeriOperativo" disabled>
+                  <label class="form-check-label" for="cbxPeriOperativo">
+                    Operativo
+                  </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPeriUso" id="cbxPeriUso" disabled>
+                  <label class="form-check-label" for="cbxPeriUso">
+                    Uso
+                  </label>
+                </div>
+            </div>
+            
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+      </form>
+
+      <br>
+      <br>
+      <table>
+				<thead>
+					<tr>
+						<th>ID AULA</th>
+						<th>NOMBRE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aulasBa:${aulasBarakaldo}" >
+						<td th:text="${aulasBa.id_aula}" ></td>
+						<td th:text="${aulasBa.nombre}" ></td>
+					</tr>
+				</tbody>
+      </table>
+      <br>
+      <br>
+      <table>
+				<thead>
+					<tr>
+						<th>ID AULA</th>
+						<th>NOMBRE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aulasBi:${aulasBilbao}" >
+						<td th:text="${aulasBi.id_aula}" ></td>
+						<td th:text="${aulasBi.nombre}" ></td>
+					</tr>
+				</tbody>
+			</table>
+</body>
+</html>
