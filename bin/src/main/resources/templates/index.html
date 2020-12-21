@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>P�gina para hacer pruebas</title>
+</head>
+<body>
+	<div>
+		<h1>CENTROS</h1>
+		<br>
+		<form th:action="@{/buscar}" th:method="GET">
+			<table>
+				<thead>
+					<tr>
+						<th>ID CENTRO</th>
+						<th>LOCALIDAD</th>
+						<th>DIRECCI�N</th>
+						<th>CP</th>
+						<th>TEL�FONO</th>
+						<th>WHATSAPP</th>
+						<th>E-MAIL</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="centro:${centros}" >
+						<td th:text="${centro.id_centro}" ></td>
+						<td th:text="${centro.localidad}" ></td>
+						<td th:text="${centro.direccion}" ></td>
+						<td th:text="${centro.cp}" ></td>
+						<td th:text="${centro.telefono}" ></td>
+						<td th:text="${centro.whatsapp}" ></td>
+						<td th:text="${centro.email}" ></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<br>
+			<h1>LOCALIDADES</h1>
+			<br>
+			<table>
+				<thead>
+					<tr>
+						<th>LOCALIDAD</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="centro:${centros}" >
+						<td th:text="${centro.localidad}" ></td>
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<br>
+			<table>
+				<thead>
+					<tr>
+						<th>ID AULA</th>
+						<th>NOMBRE</th>
+						<th>CENTRO</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aula:${aulas}" >
+						<td th:text="${aula.id_aula}" ></td>
+						<td th:text="${aula.nombre}" ></td>
+						<td th:text="${aula.centro}" ></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			<br>
+			<input type="submit" value="Buscar" />
+		</form>
+	</div>
+</body>
+</html>
