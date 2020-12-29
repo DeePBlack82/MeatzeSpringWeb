@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import es.meatze.core.entity.Aula;
 import es.meatze.core.entity.Ordenador;
 import es.meatze.core.interfaceService.IOrdenadorService;
 import es.meatze.core.interfaces.IOrdenador;
@@ -39,7 +39,9 @@ public class OrdenadorService implements IOrdenadorService {
 						
 		// Ejecutar la Query y devolver resultados
 		List<Ordenador> ordenadoresCentro = consulta.getResultList();
-						
+				
+		miSession.close();
+		
 		return ordenadoresCentro;
 	}
 
@@ -54,7 +56,9 @@ public class OrdenadorService implements IOrdenadorService {
 								
 		// Ejecutar la Query y devolver resultados
 		List<Ordenador> ordenadoresCentro = consulta.getResultList();
-								
+						
+		miSession.close();
+		
 		return ordenadoresCentro;
 	}
 
@@ -67,14 +71,34 @@ public class OrdenadorService implements IOrdenadorService {
 
 	@Override
 	public List<String> listarRAM() {
-		// TODO Auto-generated method stub
-		return null;
+		// Obtener la session
+		Session miSession = sessionFactory.openSession();
+										
+		// Crear la consulta (Query)
+		Query<String> consulta = miSession.createQuery("select distinct o.ram from Ordenador o order by o.ram asc", String.class);
+						
+		// Ejecutar la Query y devolver resultados
+		List<String> ramOrdenadores = consulta.getResultList();
+						
+		miSession.close();
+		
+		return ramOrdenadores;
 	}
 
 	@Override
 	public List<String> listarAlmacenamiento() {
-		// TODO Auto-generated method stub
-		return null;
+		// Obtener la session
+		Session miSession = sessionFactory.openSession();
+										
+		// Crear la consulta (Query)
+		Query<String> consulta = miSession.createQuery("select distinct o.disco1 from Ordenador o order by o.disco1 asc", String.class);
+						
+		// Ejecutar la Query y devolver resultados
+		List<String> almacenamientoOrdenadores = consulta.getResultList();
+								
+		miSession.close();
+		
+		return almacenamientoOrdenadores;
 	}
 
 }

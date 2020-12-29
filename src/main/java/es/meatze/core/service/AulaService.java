@@ -1,7 +1,6 @@
 package es.meatze.core.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,8 +30,7 @@ public class AulaService implements IAulaService {
 	}
 
 	@Override
-	@Transactional
-	public List<Aula> aulasPorCentro(String idAula) {
+	public List<Aula> aulasPorCentro(String idCentro) {
 		
 		
 		// Obtener la session
@@ -40,11 +38,13 @@ public class AulaService implements IAulaService {
 				
 		// Crear la consulta (Query)
 		Query<Aula> consulta = miSession.createQuery("select a from Aula a where a.id_aula like :id_aula", Aula.class);
-		consulta.setParameter("id_aula", idAula);
+		consulta.setParameter("id_aula", idCentro);
 				
 		// Ejecutar la Query y devolver resultados
 		List<Aula> nombreAulas = consulta.getResultList();
 				
+		miSession.close();
+		
 		return nombreAulas;
 		
 	}
@@ -60,5 +60,24 @@ public class AulaService implements IAulaService {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public List<String> aulasDelCentro(String idCentro) {
+		// Obtener la session
+		Session miSession = sessionFactory.openSession();
+				
+		// Crear la consulta (Query)
+		Query<String> consulta = miSession.createQuery("select a.nombre from Aula a where a.id_aula like :id_aula", String.class);
+		consulta.setParameter("id_aula", idCentro);
+				
+		// Ejecutar la Query y devolver resultados
+		List<String> nombreAulas = consulta.getResultList();
+				
+		miSession.close();
+		
+		return nombreAulas;
+	}
+
+	
 
 }
