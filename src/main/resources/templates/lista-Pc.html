@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de búsqueda</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Búsqueda de PCs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -11,7 +11,7 @@
     <script th:src="@{/js/formulario.js}" src="..\static\js\formulario.js" type="text/javascript" ></script>
 </head>
 <body>
-    <form th:action="@{/listaPCs}" method="get" name="form" class="m-5">
+	<form th:action="@{/buscar}" name="form" class="m-5">
         <div class="form-row mb-3">
             <div class="form-check form-check-inline col-md-2">
                 <input class="form-check-input" type="radio" name="consulta" id="ordenadores" value="ordenadores" checked>
@@ -34,7 +34,6 @@
                 <label for="inputState">Aula</label>
                 <select id="aula" name="aula" class="form-control">
                   <option id="aulaTodas" value="0" selected>TODAS</option>
-                  
                   
                 </select>
             </div>
@@ -121,81 +120,50 @@
         
         <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
       </form>
-      
-      <div>
-      	<a th:href="@{/listaPCs}" th:text="PCs"></a>
-      	<br>
-      	<a th:href="@{/listaPerifericos}" th:text="Perifericos"></a>
-      </div>
-      
 
       <br>
       <br>
-      <table>
-				<thead>
-					<tr>
-						<th>ID AULA</th>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBa:${aulasBarakaldo}" >
-						<td th:text="${aulasBa.id_aula}" ></td>
-						<td th:text="${aulasBa.nombre}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <br>
-      <br>
-      <table>
-				<thead>
-					<tr>
-						<th>ID AULA</th>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBi:${aulasBilbao}" >
-						<td th:text="${aulasBi.id_aula}" ></td>
-						<td th:text="${aulasBi.nombre}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBaraka:${aulas}" >
-						<td th:text="${aulasBaraka}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>RAM</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="ram:${ram}" >
-						<td th:text="${ram}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>ALMACENAMIENTIO</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="almacenamiento:${almacenamiento}" >
-						<td th:text="${almacenamiento}" ></td>
-					</tr>
-				</tbody>
-      </table>
+      
+      <table class="table table-success table-striped" >
+      	<thead>
+      		<tr>
+      			<th>PC ID</th>
+      			<th>AULA ID</th>
+      			<th>NUM. SERIE</th>
+      			<th>PLACA BASE</th>
+      			<th>PROCESADOR</th>
+      			<th>SIST. OPERATIVO</th>
+      			<th>RAM</th>
+      			<th>GPU</th>
+      			<th>TARJETA RED</th>
+      			<th>DISCO 1</th>
+      			<th>DISCO 2</th>
+      			<th>ALL IN ONE</th>
+      			<th>USO</th>
+      			<th>OPERATIVO</th>
+      			<th>COMENTARIO</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr th:each="pc:${listaPCs}" >
+      			<td th:text="${pc.id_ordenador}"></td>
+      			<td th:text="${pc.aula.id_aula}"></td>
+      			<td th:text="${pc.ns}"></td>
+      			<td th:text="${pc.placa_base}"></td>
+      			<td th:text="${pc.procesador}"></td>
+      			<td th:text="${pc.sistema_operativo}"></td>
+      			<td th:text="${pc.ram}"></td>
+      			<td th:text="${pc.gpu}"></td>
+      			<td th:text="${pc.tarjeta_red}"></td>
+      			<td th:text="${pc.disco1}"></td>
+      			<td th:text="${pc.disco2}"></td>
+      			<td th:text="${pc.all_in_one}"></td>
+      			<td th:text="${pc.uso}"></td>
+      			<td th:text="${pc.operativo}"></td>
+      			<td th:text="${pc.comentario}"></td>
+      		</tr>
+      	</tbody>
+	  </table>
+      
 </body>
 </html>

@@ -1,9 +1,14 @@
+/**
+ * 
+ */
 var centro;
 var centroValue;
 let ordenador;
 let periferico;
-var centroBarakaldo = ["AULA 1", "AULA 2", "AULA 3", "AULA 4", "AULA 5", "DIRECCIÓN 1", "DIRECCIÓN 2", "INFORMACIÓN", "SALA DE PROFESORES", "SECRETARÍA 1", "SECRETARÍA 2"];
-var centroBilbao = ["AULA 1", "AULA 2", "AULA 3", "AULA 4", "AULA 5", "AULA 6", "AULA 7", "AULA FORMACIÓN REGLADA", "DIRECCIÓN", "DESVÁN", "MANTENIMIENTO", "SECRETARÍA", "TUTORÍAS"];
+/*var centroBarakaldo = ["AULA 1", "AULA 2", "AULA 3", "AULA 4", "AULA 5", "DIRECCIÓN 1", "DIRECCIÓN 2", "INFORMACIÓN", "SALA DE PROFESORES", "SECRETARÍA 1", "SECRETARÍA 2"];
+var centroBilbao = ["AULA 1", "AULA 2", "AULA 3", "AULA 4", "AULA 5", "AULA 6", "AULA 7", "AULA FORMACIÓN REGLADA", "DIRECCIÓN", "DESVÁN", "MANTENIMIENTO", "SECRETARÍA", "TUTORÍAS"];*/
+
+
 
 
 window.addEventListener("load", inicio);
@@ -19,14 +24,14 @@ function inicio() {
 	ordenador.addEventListener("click", deseleccionPeri);
 	periferico.addEventListener("click", habilitarPeri);
 	periferico.addEventListener("click", deseleccionPc);
-	centro.addEventListener("change", borrarContenido);
-	centro.addEventListener("change", cambiaCentro);
+	/*centro.addEventListener("change", borrarContenido);*/
+	/*centro.addEventListener("change", cambiaCentro);*/
 	document.form.cbxMemoria.addEventListener("click", checkboxMemoria);
 	document.form.cbxAlmacenamiento.addEventListener("click", checkboxAlmacenamiento);
 	document.form.cbxNombre.addEventListener("click", checkboxNombre);
-	cargarMemoria();
+	/*cargarMemoria();
 	cargarAlmacenamiento();
-	cargarPerifericos();
+	cargarPerifericos();*/
 }
 
 function deseleccionPc() {
@@ -71,15 +76,21 @@ function habilitarPeri() {
 function cambiaCentro() {
 	let centro = document.getElementById("centro");
 	let centroSeleccionado = centro.value;
-
+	/*alert([["${aulasBarakaldo}"]]);*/
+	
 	
 		if (centroSeleccionado == "BA1") {
 			let aulas = document.getElementById("aula");
 			for (var i=0; i<centroBarakaldo.length; i++) {
 				let opcion = document.createElement("option");
-				opcion.text = centroBarakaldo[i];
+				opcion.text = /*${aulasBarakaldo.nombre};*/centroBarakaldo[i];
 				aulas.appendChild(opcion);
 			}
+			/*for (var i=0; i<"${#lists.size(aulasBarakaldo)}"; i++) {
+				let opcion = document.createElement("option");
+				opcion.text = "${aulasBarakaldo.nombre}";centroBarakaldo[i];
+				aulas.appendChild(opcion);
+			}*/
 		}
 		if (centroSeleccionado == "BI1") {
 			let aulas = document.getElementById("aula");
@@ -103,11 +114,36 @@ function borrarContenido() {
 	let numAulas = document.getElementById("aula").childElementCount;
 	for (let i = numAulas; i >= 1; i--) {
 		aulas.remove(i);
-		
 	}
+	
 }
 
-function cargarMemoria() {
+function borrarAulasInsertarAulas() {
+	let aulas = document.getElementById("aula");
+	let numAulas = document.getElementById("aula").childElementCount;
+	for (let i = numAulas; i >= 1; i--) {
+		aulas.remove(i);
+	}
+	let centro = document.getElementById("centro");
+	let centroSeleccionado = centro.value;
+	if (centroSeleccionado == "BA1") {
+		let aulasBarakaldo = '<option th:each="aulasBa:${aulasBarakaldo}" th:text="${aulasBa.id_aula}" th:id="${aulasBa.id_aula}" th:name="${aulasBa.id_aula}" th:value="${aulasBa.id_aula}"></option>';
+		aulas.innerHTML += aulasBarakaldo;
+		document.write('<p th:each="aulasBa:${aulasBarakaldo}" th:text="${aulasBa.id_aula}" th:id="${aulasBa.id_aula}" th:name="${aulasBa.id_aula}" th:value="${aulasBa.id_aula}">Hola</p>');
+		/*for (var i=0; i<centroBarakaldo.length; i++) {
+			let opcion = document.createElement("option");
+			opcion.text = ${aulasBarakaldo.nombre};centroBarakaldo[i];
+			aulas.appendChild(opcion);
+		}*/
+	}
+	else if (centroSeleccionado == "BI1") {
+		let aulasBilbao = '<option th:each="aulasBi:${aulasBilbao}" th:text="${aulasBi.id_aula}" th:id="${aulasBi.id_aula}" th:name="${aulasBi.id_aula}" th:value="${aulasBi.id_aula}"></option>';
+		aulas.innerHTML += aulasBilbao;
+	}
+
+}
+
+/*function cargarMemoria() {
 	let selMemoria = document.getElementById("selMemoria");
 	let arrayMemoria = ["2 GB", "3 GB", "4 GB", "5 GB", "6 GB", "8 GB"];
 	for (var i=0; i<arrayMemoria.length; i++) {
@@ -135,7 +171,7 @@ function cargarPerifericos() {
 		opcion.innerText = arrayNombre[i];
 		selNombre.appendChild(opcion);
 	}
-}
+}*/
 
 function checkboxMemoria() {
 	if (document.form.cbxMemoria.checked) {
@@ -166,4 +202,4 @@ function checkboxNombre() {
 		document.form.selNombre.value=0;
 	}
 }
-	
+

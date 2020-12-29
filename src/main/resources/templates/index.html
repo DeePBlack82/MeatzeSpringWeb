@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="UTF-8">
-<title>P�gina para hacer pruebas</title>
+<title>Página para hacer pruebas</title>
 </head>
 <body>
 	<div>
@@ -14,9 +14,9 @@
 					<tr>
 						<th>ID CENTRO</th>
 						<th>LOCALIDAD</th>
-						<th>DIRECCI�N</th>
+						<th>DIRECCIÓN</th>
 						<th>CP</th>
-						<th>TEL�FONO</th>
+						<th>TELÉFONO</th>
 						<th>WHATSAPP</th>
 						<th>E-MAIL</th>
 					</tr>
@@ -61,7 +61,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="aula:${aulas}" >
-						<td th:text="${aula.id_aula}" ></td>
+						<td th:text="${aula.id_aula}"></td>
 						<td th:text="${aula.nombre}" ></td>
 						<td th:text="${aula.centro}" ></td>
 						
