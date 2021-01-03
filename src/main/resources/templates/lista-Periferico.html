@@ -11,13 +11,29 @@
     <script th:src="@{/js/formulario.js}" src="..\static\js\formulario.js" type="text/javascript" ></script>
 	</head>
 <body>
-	<form th:action="@{/buscar}" name="form" class="m-5">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <a class="navbar-brand" href="#">Bienvenido</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        <a class="nav-link active" th:href="@{#}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/buscar}">Home<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/}">Log Out</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
+    </nav>
+
+    <form th:action="@{/buscar}" method="get" name="form" class="m-5">
         <div class="form-row mb-3">
-            <div class="form-check form-check-inline col-md-2">
+            <div class="form-check form-check-inline col-md-2 mt-5">
                 <input class="form-check-input" type="radio" name="consulta" id="ordenadores" value="ordenadores" checked>
                 <label class="form-check-label" for="ordenadores">Ordenadores</label>
               </div>
-              <div class="form-check form-check-inline col-md-2">
+              <div class="form-check form-check-inline col-md-2 mt-5">
                 <input class="form-check-input" type="radio" name="consulta" id="perifericos" value="perifericos">
                 <label class="form-check-label" for="perifericos">Periféricos</label>
               </div>
@@ -33,7 +49,8 @@
             <div class="form-group col-md-3">
                 <label for="inputState">Aula</label>
                 <select id="aula" name="aula" class="form-control">
-                  <option id="aulaTodas" value="0" selected>TODAS</option>
+                  <option id="aulaTodas" value="todas" selected>TODAS</option>
+                  
                   
                 </select>
             </div>
@@ -41,27 +58,40 @@
         <div class="form-row">
           <div class="form-group col-md-4">
             <label for="inputEmail4">Criterio de búsqueda (Ordenador)</label>
-            <div class="form-group col-md-6">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="cbxMemoria" id="cbxMemoria">
-                  <label class="form-check-label" for="cbxMemoria">
-                    Memoria
-                  </label>
-                  <select id="selMemoria" name="selMemoria" class="form-control mb-2 ml-5" disabled>
-                    <option value="0" selected>Todas</option>
-                    <option th:each="ram:${ram}" th:text="${ram}" th:id="${ram}" th:name="${ram}" th:value="${ram}"></option>
-                  </select>
-                </div>
-            </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="cbxAlmacenamiento" id="cbxAlmacenamiento">
                   <label class="form-check-label" for="cbxAlmacenamiento">
                     Almacenamiento
                   </label>
                   <select id="selAlmacenamiento" name="selAlmacenamiento" class="form-control mb-2 ml-5" disabled>
-                    <option value="0" selected>Todos</option>
+                    <option value="todos" selected>Todos</option>
                     <option th:each="almacenamiento:${almacenamiento}" th:text="${almacenamiento}" th:id="${almacenamiento}" th:name="${almacenamiento}" th:value="${almacenamiento}"></option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxMemoria" id="cbxMemoria">
+                  <label class="form-check-label" for="cbxMemoria">
+                    Memoria
+                  </label>
+                  <select id="selMemoria" name="selMemoria" class="form-control mb-2 ml-5" disabled>
+                    <option value="todas" selected>Todas</option>
+                    <option th:each="ram:${ram}" th:text="${ram}" th:id="${ram}" th:name="${ram}" th:value="${ram}"></option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPcAllInOne" id="cbxPcAllInOne">
+                  <label class="form-check-label" for="cbxPcAllInOne">
+                    All In One
+                  </label>
+                  <select id="selAllInOne" name="selAllInOne" class="form-control mb-2 ml-5" disabled>
+                    <option value="todos" selected>Todos</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
                   </select>
                 </div>
             </div>
@@ -71,6 +101,11 @@
                   <label class="form-check-label" for="cbxPcOperativo">
                     Operativo
                   </label>
+                  <select id="selOperativoPC" name="selOperativoPC" class="form-control mb-2 ml-5" disabled>
+                    <option value="todos" selected>Todos</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                  </select>
                 </div>
             </div>
             <div class="form-group col-md-3">
@@ -79,19 +114,24 @@
                   <label class="form-check-label" for="cbxPcUso">
                     Uso
                   </label>
+                  <select id="selUsoPC" name="selUsoPC" class="form-control mb-2 ml-5" disabled>
+                    <option value="todos" selected>Todos</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                  </select>
                 </div>
             </div>
           </div>
           <div class="form-group col-md-4">
             <label for="inputPassword4">Criterio de búsqueda (Periférico)</label>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="cbxNombre" id="cbxNombre" disabled>
                   <label class="form-check-label" for="cbxNombre">
                     Nombre
                   </label>
                   <select id="selNombre" name="selNombre" class="form-control mb-2 ml-5" disabled>
-                    <option value="0" selected>Todos</option>
+                    <option value="todos" selected>Todos</option>
                     <option th:each="nombresPeri:${nombresPeri}" th:text="${nombresPeri}" th:id="${nombresPeri}" th:name="${nombresPeri}" th:value="${nombresPeri}"></option>
 
 
@@ -104,6 +144,11 @@
                   <label class="form-check-label" for="cbxPeriOperativo">
                     Operativo
                   </label>
+                  <select id="selOperativoPeriferico" name="selOperativoPeriferico" class="form-control mb-2 ml-5" disabled>
+                    <option value="todos" selected>Todos</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                  </select>
                 </div>
             </div>
             <div class="form-group col-md-3">
@@ -112,6 +157,11 @@
                   <label class="form-check-label" for="cbxPeriUso">
                     Uso
                   </label>
+                  <select id="selUsoPeriferico" name="selUsoPeriferico" class="form-control mb-2 ml-5" disabled>
+                    <option value="todos" selected>Todos</option>
+                    <option value="0">No</option>
+                    <option value="1">Sí</option>
+                  </select>
                 </div>
             </div>
             

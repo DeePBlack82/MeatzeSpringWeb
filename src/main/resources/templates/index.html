@@ -63,7 +63,7 @@
 					<tr th:each="aula:${aulas}" >
 						<td th:text="${aula.id_aula}"></td>
 						<td th:text="${aula.nombre}" ></td>
-						<td th:text="${aula.centro}" ></td>
+						<td th:text="${aula.centro.localidad} + ' (' + ${aula.centro.id_centro} + ')'" ></td>
 						
 					</tr>
 				</tbody>
