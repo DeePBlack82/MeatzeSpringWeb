@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de búsqueda</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Búsqueda de PCs</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -11,7 +11,8 @@
     <script th:src="@{/js/formulario.js}" src="..\static\js\formulario.js" type="text/javascript" ></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<<<<<<< HEAD
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <a class="navbar-brand" href="#">Bienvenido</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,7 +29,6 @@
     </nav>
 
     <form th:action="@{/buscar}" method="get" name="form" class="m-5">
-
         <div class="form-row mb-3">
             <div class="form-check form-check-inline col-md-2 mt-5">
                 <input class="form-check-input" type="radio" name="consulta" id="ordenadores" value="ordenadores" checked>
@@ -51,7 +51,6 @@
                 <label for="inputState">Aula</label>
                 <select id="aula" name="aula" class="form-control">
                   <option id="aulaTodas" value="todas" selected>TODAS</option>
-
                   
                   
                 </select>
@@ -61,7 +60,6 @@
           <div class="form-group col-md-4">
             <label for="inputEmail4">Criterio de búsqueda (Ordenador)</label>
             <div class="form-group col-md-4">
-
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" name="cbxAlmacenamiento" id="cbxAlmacenamiento">
                   <label class="form-check-label" for="cbxAlmacenamiento">
@@ -95,7 +93,6 @@
                     <option value="todos" selected>Todos</option>
                     <option value="0">No</option>
                     <option value="1">Sí</option>
-
                   </select>
                 </div>
             </div>
@@ -136,7 +133,6 @@
                   </label>
                   <select id="selNombre" name="selNombre" class="form-control mb-2 ml-5" disabled>
                     <option value="todos" selected>Todos</option>
-
                     <option th:each="nombresPeri:${nombresPeri}" th:text="${nombresPeri}" th:id="${nombresPeri}" th:name="${nombresPeri}" th:value="${nombresPeri}"></option>
 
 
@@ -167,6 +163,109 @@
                     <option value="0">No</option>
                     <option value="1">Sí</option>
                   </select>
+=======
+	<form th:action="@{/buscar}" name="form" class="m-5">
+        <div class="form-row mb-3">
+            <div class="form-check form-check-inline col-md-2">
+                <input class="form-check-input" type="radio" name="consulta" id="ordenadores" value="ordenadores" checked>
+                <label class="form-check-label" for="ordenadores">Ordenadores</label>
+              </div>
+              <div class="form-check form-check-inline col-md-2">
+                <input class="form-check-input" type="radio" name="consulta" id="perifericos" value="perifericos">
+                <label class="form-check-label" for="perifericos">Periféricos</label>
+              </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="inputState">Centro</label>
+                <select  id="centro" name="centro" class="form-control" onchange="borrarAulasInsertarAulas()">
+                  <option id="centroTodos" value="todos" selected>TODOS</option>
+                  <option th:each="centro:${centros}" th:text="${centro.localidad}" th:id="${centro.id_centro}" th:name="${centro.id_centro}" th:value="${centro.id_centro}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputState">Aula</label>
+                <select id="aula" name="aula" class="form-control">
+                  <option id="aulaTodas" value="0" selected>TODAS</option>
+                  
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputEmail4">Criterio de búsqueda (Ordenador)</label>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxMemoria" id="cbxMemoria">
+                  <label class="form-check-label" for="cbxMemoria">
+                    Memoria
+                  </label>
+                  <select id="selMemoria" name="selMemoria" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todas</option>
+                    <option th:each="ram:${ram}" th:text="${ram}" th:id="${ram}" th:name="${ram}" th:value="${ram}"></option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxAlmacenamiento" id="cbxAlmacenamiento">
+                  <label class="form-check-label" for="cbxAlmacenamiento">
+                    Almacenamiento
+                  </label>
+                  <select id="selAlmacenamiento" name="selAlmacenamiento" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todos</option>
+                    <option th:each="almacenamiento:${almacenamiento}" th:text="${almacenamiento}" th:id="${almacenamiento}" th:name="${almacenamiento}" th:value="${almacenamiento}"></option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPcOperativo" id="cbxPcOperativo">
+                  <label class="form-check-label" for="cbxPcOperativo">
+                    Operativo
+                  </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPcUso" id="cbxPcUso">
+                  <label class="form-check-label" for="cbxPcUso">
+                    Uso
+                  </label>
+                </div>
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputPassword4">Criterio de búsqueda (Periférico)</label>
+            <div class="form-group col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxNombre" id="cbxNombre" disabled>
+                  <label class="form-check-label" for="cbxNombre">
+                    Nombre
+                  </label>
+                  <select id="selNombre" name="selNombre" class="form-control mb-2 ml-5" disabled>
+                    <option value="0" selected>Todos</option>
+                    <option th:each="nombresPeri:${nombresPeri}" th:text="${nombresPeri}" th:id="${nombresPeri}" th:name="${nombresPeri}" th:value="${nombresPeri}"></option>
+
+
+                  </select>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPeriOperativo" id="cbxPeriOperativo" disabled>
+                  <label class="form-check-label" for="cbxPeriOperativo">
+                    Operativo
+                  </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="cbxPeriUso" id="cbxPeriUso" disabled>
+                  <label class="form-check-label" for="cbxPeriUso">
+                    Uso
+                  </label>
+>>>>>>> refs/remotes/origin/Dani
                 </div>
             </div>
             
@@ -175,84 +274,50 @@
         
         <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
       </form>
-      
-      <div>
-      	<a th:href="@{/listaPCs}" th:text="PCs"></a>
-      	<br>
-      	<a th:href="@{/listaPerifericos}" th:text="Perifericos"></a>
-      </div>
-      
 
       <br>
-      <a th:href="@{/listaPCs}" href="lista-Pc.html">Tabla PC</a>
       <br>
-      <a th:href="@{/listaPerifericos}" href="lista-Periferico">Tabla Periféricos</a>
-      <br>
-      <table>
-				<thead>
-					<tr>
-						<th>ID AULA</th>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBa:${aulasBarakaldo}" >
-						<td th:text="${aulasBa.id_aula}" ></td>
-						<td th:text="${aulasBa.nombre}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <br>
-      <br>
-      <table>
-				<thead>
-					<tr>
-						<th>ID AULA</th>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBi:${aulasBilbao}" >
-						<td th:text="${aulasBi.id_aula}" ></td>
-						<td th:text="${aulasBi.nombre}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>NOMBRE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="aulasBaraka:${aulas}" >
-						<td th:text="${aulasBaraka}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>RAM</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="ram:${ram}" >
-						<td th:text="${ram}" ></td>
-					</tr>
-				</tbody>
-      </table>
-      <table>
-				<thead>
-					<tr>
-						<th>ALMACENAMIENTIO</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="almacenamiento:${almacenamiento}" >
-						<td th:text="${almacenamiento}" ></td>
-					</tr>
-				</tbody>
-      </table>
+      
+      <table class="table table-success table-striped" >
+      	<thead>
+      		<tr>
+      			<th>PC ID</th>
+      			<th>AULA ID</th>
+      			<th>NUM. SERIE</th>
+      			<th>PLACA BASE</th>
+      			<th>PROCESADOR</th>
+      			<th>SIST. OPERATIVO</th>
+      			<th>RAM</th>
+      			<th>GPU</th>
+      			<th>TARJETA RED</th>
+      			<th>DISCO 1</th>
+      			<th>DISCO 2</th>
+      			<th>ALL IN ONE</th>
+      			<th>USO</th>
+      			<th>OPERATIVO</th>
+      			<th>COMENTARIO</th>
+      		</tr>
+      	</thead>
+      	<tbody>
+      		<tr th:each="pc:${listaPCs}" >
+      			<td th:text="${pc.id_ordenador}"></td>
+      			<td th:text="${pc.aula.id_aula}"></td>
+      			<td th:text="${pc.ns}"></td>
+      			<td th:text="${pc.placa_base}"></td>
+      			<td th:text="${pc.procesador}"></td>
+      			<td th:text="${pc.sistema_operativo}"></td>
+      			<td th:text="${pc.ram}"></td>
+      			<td th:text="${pc.gpu}"></td>
+      			<td th:text="${pc.tarjeta_red}"></td>
+      			<td th:text="${pc.disco1}"></td>
+      			<td th:text="${pc.disco2}"></td>
+      			<td th:text="${pc.all_in_one}"></td>
+      			<td th:text="${pc.uso}"></td>
+      			<td th:text="${pc.operativo}"></td>
+      			<td th:text="${pc.comentario}"></td>
+      		</tr>
+      	</tbody>
+	  </table>
+      
 </body>
 </html>
