@@ -6,4 +6,5 @@ import es.meatze.core.entity.Centro;
 
 public interface ICentroService {
 	public List<Centro> listarCentros();
+	public List<Centro> consultaCentro(String idCentro);
 }

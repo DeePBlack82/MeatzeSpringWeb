@@ -37,8 +37,10 @@ public class AulaService implements IAulaService {
 		Session miSession = sessionFactory.openSession();
 				
 		// Crear la consulta (Query)
+		String like = "%";
+		String id = idCentro + like;
 		Query<Aula> consulta = miSession.createQuery("select a from Aula a where a.id_aula like :id_aula", Aula.class);
-		consulta.setParameter("id_aula", idCentro);
+		consulta.setParameter("id_aula", id);
 				
 		// Ejecutar la Query y devolver resultados
 		List<Aula> nombreAulas = consulta.getResultList();

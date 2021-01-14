@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>Recogida de variables de formulario</title>
+</head>
+<body>
+
+
+	<table>
+		<tr>
+			<th>ID_CENTRO</th>
+			<th>LOCALIDAD</th>
+			<th>CP</th>
+			<th>DIRECCIÓN</th>
+			<th>WHATSAPP</th>
+		</tr>
+		<tr th:each="centro : ${centro}">
+			<td th:text="${centro.id_centro}">
+			<td th:text="${centro.localidad}">
+			<td th:text="${centro.cp}">
+			<td th:text="${centro.direccion}">
+			<td th:text="${centro.whatsapp}">
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<th>ID_AULA</th>
+			<th>NOMBRE</th>
+		</tr>
+		<tr th:each="aula : ${aula}">
+			<td th:text="${aula.id_aula}">
+			<td th:text="${aula.nombre}">
+			<td th:text="${aula.centro.id_centro}"> 
+		</tr>
+	</table>
+
+	<select>
+		<option th:each="aula : ${aula}" th:text="${aula.nombre}">
+	</select>
+
+<!-- 
+
+	<br>
+	<br>
+	<label th:text="${centroSeleccionado}">"${centroSeleccionado}"</label>
+	<br>
+	<br>
+	<p th:text="${aulaSeleccionada}">${aulaSeleccionada}</p>
+	<br>
+	<br>
+	<p th:text="${cbxAlmacenamiento}">tybyrbtyrrbv</p>
+	<br>
+	<br>
+	<p th:text="${almacenamientoSeleccionado}"></p>
+	<br>
+	<br>
+	<p th:text="${cbxMemoria}"></p>
+	<br>
+	<br>
+	<p th:text="${memoriaSeleccionada}"></p>
+	<br>
+	<br>
+	<p th:text="${cbxAllInOne}"></p>
+	<br>
+	<br>
+	<p th:text="${selAllInOne}"></p>
+	<br>
+	<br>
+	<p th:text="${cbxPcOperativo}"></p>
+	<br>
+	<br>
+	<p th:text="${selOperativoPC}"></p>
+	<br>
+	<br>
+	<p th:text="${cbxPcUso}"></p>
+	<br>
+	<br>
+	<p th:text="${selUsoPC}"></p>
+	<br>
+	<br>
+
+-->
+
+</body>
+</html>

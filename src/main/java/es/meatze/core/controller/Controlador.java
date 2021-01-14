@@ -8,7 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.meatze.core.entity.Aula;
 import es.meatze.core.entity.Centro;
@@ -77,9 +78,29 @@ public class Controlador {
 		List<String> almacenamiento = ordenadorService.listarAlmacenamiento(); // Listado de todos los DISCOS disponibles
 		modelo.addAttribute("almacenamiento", almacenamiento);
 		
-
+/*********************************************************/		
+		modelo.addAttribute("aula", new Aula());
+/*********************************************************/
+		
 		return "formulario";
 	}
+	
+	
+	
+@RequestMapping("/formulario2")
+	public String recogidaVariables(
+			@RequestParam("centro") String centroSeleccionado,
+			Model modelo) {
+		List<Centro> centro = centroService.consultaCentro(centroSeleccionado);
+		List<Aula> aula = aulaService.aulasPorCentro(centroSeleccionado);
+		modelo.addAttribute("centro", centro);
+		modelo.addAttribute("aula", aula);
+		return "formulario2";
+	}
+	
+
+	
+	
 	
 	@GetMapping("/listaPCs")
 	public String listaPCs(Model modelo) {
@@ -109,6 +130,37 @@ public class Controlador {
 		return "lista-Pc";
 	}
 	
+/*******************************************************************************************/	
+/*	@RequestMapping("/formulario2")
+	public String datosPcRecogidos(
+			@RequestParam("centro") String centroSeleccionado,
+			@RequestParam("aula") String aulaSeleccionada,
+			@RequestParam("cbxMemoria") Boolean cbxMemoria,
+			@RequestParam("selMemoria") String memoriaSeleccionada,
+			@RequestParam("selAllInOne") String selAllInOne,
+			@RequestParam("cbxPcOperativo") Boolean cbxPcOperativo,
+			@RequestParam("selOperativoPC") String selOperativoPC,
+			@RequestParam("cbxPcUso") Boolean cbxPcUso,
+			@RequestParam("selUsoPC") String selUsoPC,
+			Model modelo) {
+		modelo.addAttribute("centroSeleccionado", centroSeleccionado);
+		modelo.addAttribute("aulaSeleccionada", aulaSeleccionada);
+		modelo.addAttribute("cbxMemoria", cbxMemoria);
+		modelo.addAttribute("selMemoria", memoriaSeleccionada);
+		modelo.addAttribute("selAllInOne", selAllInOne);
+		modelo.addAttribute("cbxPcOperativo", cbxPcOperativo);
+		modelo.addAttribute("selOperativoPC", selOperativoPC);
+		modelo.addAttribute("cbxPcUso", cbxPcUso);
+		modelo.addAttribute("selUsoPC", selUsoPC);
+		
+		
+		return "formulario2";
+		
+	}*/
+/*******************************************************************************************************/	
+	
+	
+	
 	@GetMapping("/listaPerifericos")
 	public String listaPerifericos(Model modelo) {
 		
@@ -130,4 +182,14 @@ public class Controlador {
 
 		return "lista-Periferico";
 	}
+	
+	
+/********************************************************************************************/
+	
+	
+	
+/********************************************************************************************/	
+	
+	
+	
 }
